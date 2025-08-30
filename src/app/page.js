@@ -1,13 +1,19 @@
 'use client';
-import { useState } from 'react';
-import productosData from '../data/productos.json';
-import CartHeader from '../components/CartHeader';
-import ProductTable from '../components/ProductTable';
-import CartSummary from '../components/CartSummary';
+import { useState } from 'react'; // Importa el hook useState de React
+import productosData from '../data/productos.json'; // Importa los datos de productos desde un archivo JSON
+import CartHeader from '../components/CartHeader'; // Importa el componente CartHeader
+import ProductTable from '../components/ProductTable'; // Importa el componente ProductTable
+import CartSummary from '../components/CartSummary'; // Importa el componente CartSummary
 
 export default function Home() {
+  // Estado para almacenar la lista de productos en el carrito
   const [productos, setProductos] = useState(productosData);
 
+  /**
+   * Actualiza la cantidad de un producto en el carrito
+   * @param {number} id - El ID del producto a actualizar
+   * @param {number} nuevaCantidad - La nueva cantidad del producto
+   */
   const actualizarCantidad = (id, nuevaCantidad) => {
     if (nuevaCantidad < 1) return;
     setProductos(productos.map(producto => 
@@ -15,15 +21,21 @@ export default function Home() {
     ));
   };
 
+  /**
+   * Elimina un producto del carrito
+   * @param {number} id - El ID del producto a eliminar
+   */
   const eliminarProducto = (id) => {
     setProductos(productos.filter(producto => producto.id !== id));
   };
 
+  // Calcula el precio total y la cantidad total de productos en el carrito
   const totalPrecio = productos.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
+  // Calcula la cantidad total de productos en el carrito
   const totalProductos = productos.reduce((total, producto) => total + producto.cantidad, 0);
 
   return (
-    <div className="min-vh-100" style={{backgroundColor: '#fafafa', fontFamily: 'var(--font-inter)'}}>
+    <div className="min-vh-100" style={{backgroundColor: '#e4e2e2', fontFamily: 'var(--font-inter)'}}>
       <div className="container py-5">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10 col-xl-8">

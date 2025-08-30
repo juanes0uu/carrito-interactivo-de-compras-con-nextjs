@@ -17,15 +17,8 @@ export default function CartSummary({ totalPrecio, totalProductos }) {
         <div className="col-md-6">
           <div className="text-end">
             <button 
-              className="btn btn-lg px-4 py-2 border-0"
-              style={{
-                backgroundColor: '#3b82f6',
-                color: 'white',
-                fontWeight: '500',
-                borderRadius: '8px',
-                transition: 'all 0.2s',
-                boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)'
-              }}
+              className="btn btn-primary btn-lg px-4 py-2 border-0"
+             style={{ borderRadius:25}}
               onMouseEnter={(e) => e.target.style.backgroundColor = '#2563eb'}
               onMouseLeave={(e) => e.target.style.backgroundColor = '#3b82f6'}
             >

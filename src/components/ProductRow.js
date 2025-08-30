@@ -12,7 +12,7 @@ export default function ProductRow({ producto, actualizarCantidad, eliminarProdu
             onMouseEnter={(e) => e.target.style.opacity = '1'}
             onMouseLeave={(e) => e.target.style.opacity = '0.7'}
           >
-            <i className="bi bi-trash3"></i>
+            <i className="bi bi-trash3 px-3"></i>
           </button>
         </div>
       </td>
