@@ -37,6 +37,9 @@ export default function Home() {
   return (
     <div className="min-vh-100" style={{backgroundColor: '#e4e2e2', fontFamily: 'var(--font-inter)'}}>
       <div className="container py-5">
+        <h1 className="text-center mb-5" style={{fontSize: '2.25rem', fontWeight: '700', color: '#0f172a'}}>
+         Carrito Interactivo de Compras con Next.js 🤯
+        </h1>
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10 col-xl-8">
             <div className="card border-0" style={{boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', borderRadius: '12px'}}>

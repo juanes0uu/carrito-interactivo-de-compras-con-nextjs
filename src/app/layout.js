@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Carrito de Compras",
-  description: "Carrito de compras interactivo",
+  title: "Carrito Interactivo de Compras con Next.js 🤯",
+  description: "Carrito de compras interactivo con Next.js y Bootstrap 5",
 };
 
 export default function RootLayout({ children }) {
