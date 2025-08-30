@@ -1,95 +1,47 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import { useState } from 'react';
+import productosData from '../data/productos.json';
+import CartHeader from '../components/CartHeader';
+import ProductTable from '../components/ProductTable';
+import CartSummary from '../components/CartSummary';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [productos, setProductos] = useState(productosData);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const actualizarCantidad = (id, nuevaCantidad) => {
+    if (nuevaCantidad < 1) return;
+    setProductos(productos.map(producto => 
+      producto.id === id ? { ...producto, cantidad: nuevaCantidad } : producto
+    ));
+  };
+
+  const eliminarProducto = (id) => {
+    setProductos(productos.filter(producto => producto.id !== id));
+  };
+
+  const totalPrecio = productos.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
+  const totalProductos = productos.reduce((total, producto) => total + producto.cantidad, 0);
+
+  return (
+    <div className="min-vh-100" style={{backgroundColor: '#fafafa', fontFamily: 'var(--font-inter)'}}>
+      <div className="container py-5">
+        <div className="row justify-content-center">
+          <div className="col-12 col-lg-10 col-xl-8">
+            <div className="card border-0" style={{boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', borderRadius: '12px'}}>
+              <CartHeader totalProductos={totalProductos} />
+              <ProductTable 
+                productos={productos}
+                actualizarCantidad={actualizarCantidad}
+                eliminarProducto={eliminarProducto}
+              />
+              <CartSummary 
+                totalPrecio={totalPrecio}
+                totalProductos={totalProductos}
+              />
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }
