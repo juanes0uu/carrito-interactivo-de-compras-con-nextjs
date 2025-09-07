@@ -1,5 +1,11 @@
-import ProductRow from './ProductRow';
+import ProductRow from './ProductRow'; // Componente que muestra una fila de un producto en el carrito
 
+/**
+ * Componente ProductTable que muestra la tabla de productos en el carrito.
+ * @param {Object} productos - La lista de productos en el carrito.
+ * @param {function} actualizarCantidad - Función para actualizar la cantidad del producto.
+ * @param {function} eliminarProducto - Función para eliminar el producto.
+ */
 export default function ProductTable({ productos, actualizarCantidad, eliminarProducto }) {
   return (
     <div className="card-body p-0">

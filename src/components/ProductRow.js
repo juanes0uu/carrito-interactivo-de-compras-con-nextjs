@@ -1,3 +1,9 @@
+/**
+ * Componente que recibe un producto y sus funciones para actualizar la cantidad y eliminar el producto.
+ * @param {Object} producto - El producto a mostrar.
+ * @param {function} actualizarCantidad - Función para actualizar la cantidad del producto.
+ * @param {function} eliminarProducto - Función para eliminar el producto.
+ */
 export default function ProductRow({ producto, actualizarCantidad, eliminarProducto }) {
   return (
     <tr style={{borderBottom: '1px solid #e2e8f0'}}>

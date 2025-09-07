@@ -5,9 +5,9 @@ import CartHeader from '../components/CartHeader'; // Importa el componente Cart
 import ProductTable from '../components/ProductTable'; // Importa el componente ProductTable
 import CartSummary from '../components/CartSummary'; // Importa el componente CartSummary
 
+
 export default function Home() {
-  // Estado para almacenar la lista de productos en el carrito
-  const [productos, setProductos] = useState(productosData);
+  const [productos, setProductos] = useState(productosData); // Inicializa el estado con los datos de productos
 
   /**
    * Actualiza la cantidad de un producto en el carrito
@@ -43,12 +43,15 @@ export default function Home() {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10 col-xl-8">
             <div className="card border-0" style={{boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', borderRadius: '12px'}}>
+            {/* Encabezado del carrito */}
               <CartHeader totalProductos={totalProductos} />
+              {/* Tabla de productos */}
               <ProductTable 
                 productos={productos}
                 actualizarCantidad={actualizarCantidad}
                 eliminarProducto={eliminarProducto}
               />
+              {/* Resumen del carrito */}
               <CartSummary 
                 totalPrecio={totalPrecio}
                 totalProductos={totalProductos}

@@ -1,3 +1,9 @@
+/**
+ * Componente CartSummary que muestra el resumen del carrito de compras, 
+ * que incluye el total de precio y la cantidad total de productos.
+ * @param {number} totalPrecio - El total de precio de los productos en el carrito.
+ * @param {number} totalProductos - La cantidad total de productos en el carrito.
+ */
 export default function CartSummary({ totalPrecio, totalProductos }) {
   return (
     <div className="card-footer bg-white border-0 py-4" style={{borderRadius: '0 0 12px 12px', borderTop: '1px solid #e2e8f0'}}>

@@ -1,3 +1,4 @@
+// Componente CartHeader que muestra el encabezado del carrito de compras
 export default function CartHeader({ totalProductos }) {
   return (
     <div className="card-header bg-white border-0 py-4" style={{borderRadius: '12px 12px 0 0'}}>
