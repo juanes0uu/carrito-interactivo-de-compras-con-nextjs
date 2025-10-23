@@ -1,14 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
-import CartHeader from '../components/CartHeader';
-import ProductTable from '../components/ProductTable';
-import CartSummary from '../components/CartSummary';
-import { useCart } from '../context/CartContext';
+import CartHeader from '../../components/CartHeader';
+import ProductTable from '../../components/ProductTable';
+import CartSummary from '../../components/CartSummary';
+import { useCart } from '../../context/CartContext';
 
-export default function Home() {
+export default function CartPage() {
   const { cart, updateCantidad, eliminarProducto, totalPrecio, totalProductos } = useCart();
 
-  // Si quieres mostrar un mensaje cuando el carrito esté vacío:
   if (!cart || cart.length === 0) {
     return (
       <div className="min-vh-100" style={{backgroundColor: '#e4e2e2', fontFamily: 'var(--font-inter)'}}>
@@ -23,7 +21,7 @@ export default function Home() {
                 <CartHeader totalProductos={totalProductos} />
                 <div className="card-body p-5 text-center">
                   <p className="mb-4">Tu carrito está vacío.</p>
-                  <a href="/products" className="btn btn-primary">Ir al catálogo</a>
+                  <a href="/" className="btn btn-primary">Ir al catálogo</a>
                 </div>
               </div>
             </div>

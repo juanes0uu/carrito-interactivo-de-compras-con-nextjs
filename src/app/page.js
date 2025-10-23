@@ -1,63 +1,46 @@
 'use client';
-import { useState } from 'react'; // Importa el hook useState de React
-import productosData from '../data/productos.json'; // Importa los datos de productos desde un archivo JSON
-import CartHeader from '../components/CartHeader'; // Importa el componente CartHeader
-import ProductTable from '../components/ProductTable'; // Importa el componente ProductTable
-import CartSummary from '../components/CartSummary'; // Importa el componente CartSummary
 
+import { useEffect, useState } from 'react';
+import productosData from '../data/productos.json';
+import { useCart } from '../context/CartContext';
 
-export default function Home() {
-  const [productos, setProductos] = useState(productosData); // Inicializa el estado con los datos de productos
+export default function CatalogoPage() {
+  const [productos, setProductos] = useState([]);
+  const { addToCart } = useCart();
 
-  /**
-   * Actualiza la cantidad de un producto en el carrito
-   * @param {number} id - El ID del producto a actualizar
-   * @param {number} nuevaCantidad - La nueva cantidad del producto
-   */
-  const actualizarCantidad = (id, nuevaCantidad) => {
-    if (nuevaCantidad < 1) return;
-    setProductos(productos.map(producto => 
-      producto.id === id ? { ...producto, cantidad: nuevaCantidad } : producto
-    ));
-  };
-
-  /**
-   * Elimina un producto del carrito
-   * @param {number} id - El ID del producto a eliminar
-   */
-  const eliminarProducto = (id) => {
-    setProductos(productos.filter(producto => producto.id !== id));
-  };
-
-  // Calcula el precio total y la cantidad total de productos en el carrito
-  const totalPrecio = productos.reduce((total, producto) => total + (producto.precio * producto.cantidad), 0);
-  // Calcula la cantidad total de productos en el carrito
-  const totalProductos = productos.reduce((total, producto) => total + producto.cantidad, 0);
+  useEffect(() => {
+    setProductos(productosData);
+  }, []);
 
   return (
-    <div className="min-vh-100" style={{backgroundColor: '#e4e2e2', fontFamily: 'var(--font-inter)'}}>
+    <div className="min-vh-100" style={{backgroundColor: '#f8fafc', fontFamily: 'var(--font-inter)'}}>
       <div className="container py-5">
-        <h1 className="text-center mb-5" style={{fontSize: '2.25rem', fontWeight: '700', color: '#0f172a'}}>
-         Carrito Interactivo de Compras con Next.js 🤯
-        </h1>
-        <div className="row justify-content-center">
-          <div className="col-12 col-lg-10 col-xl-8">
-            <div className="card border-0" style={{boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)', borderRadius: '12px'}}>
-            {/* Encabezado del carrito */}
-              <CartHeader totalProductos={totalProductos} />
-              {/* Tabla de productos */}
-              <ProductTable 
-                productos={productos}
-                actualizarCantidad={actualizarCantidad}
-                eliminarProducto={eliminarProducto}
-              />
-              {/* Resumen del carrito */}
-              <CartSummary 
-                totalPrecio={totalPrecio}
-                totalProductos={totalProductos}
-              />
+        <h1 className="text-center mb-4" style={{fontSize: '2rem', fontWeight: '700'}}>Catálogo de Productos</h1>
+        <div className="row g-4">
+          {productos.map(prod => (
+            <div key={prod.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div className="card h-100 shadow-sm" style={{borderRadius: 12}}>
+                <img src={prod.imagen} className="card-img-top" alt={prod.nombre} style={{height: 160, objectFit: 'cover', borderTopLeftRadius: 12, borderTopRightRadius: 12}} />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title" style={{fontWeight: 600}}>{prod.nombre}</h5>
+                  <p className="card-text text-muted" style={{flexGrow: 1}}>${prod.precio}</p>
+                  <div className="d-grid">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => addToCart(prod, 1)}
+                      style={{ borderRadius: 25 }}
+                    >
+                      Agregar al carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="mt-5 text-center">
+          <a href="/cart" className="btn btn-outline-secondary">Ir al carrito</a>
         </div>
       </div>
     </div>
