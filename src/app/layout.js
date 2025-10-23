@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "./globals.css";
+import { CartProvider } from "../context/CartContext"; // <-- nueva importación
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={`${inter.variable} ${inter.className}`}>
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

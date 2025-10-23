@@ -1,15 +1,11 @@
-/**
- * Componente que recibe un producto y sus funciones para actualizar la cantidad y eliminar el producto.
- * @param {Object} producto - El producto a mostrar.
- * @param {function} actualizarCantidad - Función para actualizar la cantidad del producto.
- * @param {function} eliminarProducto - Función para eliminar el producto.
- */
+'use client';
+
 export default function ProductRow({ producto, actualizarCantidad, eliminarProducto }) {
   return (
     <tr style={{borderBottom: '1px solid #e2e8f0'}}>
       <td className="py-2 px-4">
         <div className="d-flex align-items-center">
-          <div className="rounded me-3" style={{width: '32px', height: '32px', backgroundColor: '#e2e8f0'}}></div>
+          <img src={producto.imagen} alt={producto.nombre} style={{width: 48, height: 48, objectFit: 'cover', borderRadius: 8, marginRight: 12}} />
           <span style={{fontWeight: '500', color: '#0f172a', fontSize: '0.875rem'}}>{producto.nombre}</span>
           <button 
             className="btn p-0 ms-2 border-0 bg-transparent"
